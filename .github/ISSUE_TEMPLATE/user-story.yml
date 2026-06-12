@@ -9,8 +9,12 @@ body:
     attributes:
       label: Context
       description: Why is this story needed?
-      placeholder: |
-        Explain the business or functional context.
+      value: |
+        This functionality is part of Feedback AI Copilot.
+
+        The goal of this story is to incrementally build a production-ready application while maintaining clean architecture, testability, and documentation standards.
+
+        This feature contributes to the overall platform capabilities and may be leveraged by future AI, reporting, analytics, or operational features.
     validations:
       required: true
 
@@ -34,12 +38,14 @@ body:
       label: Acceptance Criteria
       description: Define when this story is considered done.
       placeholder: |
-        Scenario 1:
+        Scenario 1
+
         Given ...
         When ...
         Then ...
 
-        Scenario 2:
+        Scenario 2
+
         Given ...
         When ...
         Then ...
@@ -52,9 +58,19 @@ body:
       label: Technical Notes
       description: Optional implementation details.
       placeholder: |
-        - Spring Boot endpoint
-        - PostgreSQL table
-        - Integration tests
+        - Create UseCase
+        - Create REST endpoint
+        - Add integration tests
+
+  - type: textarea
+    id: definition_of_done
+    attributes:
+      label: Definition of Done
+      value: |
+        - Feature implemented
+        - Tests passing
+        - Documentation updated if needed
+        - Issue moved to Done
 
   - type: dropdown
     id: priority
