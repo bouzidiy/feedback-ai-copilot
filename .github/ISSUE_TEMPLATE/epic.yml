@@ -1,0 +1,53 @@
+name: Epic
+description: Create a large functional or technical area
+title: "[EPIC] "
+labels: ["epic"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What is the main objective of this epic?
+      placeholder: "Example: Build the foundation of the application"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why is this epic important?
+      placeholder: "Explain the business, technical or learning context."
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What is included in this epic?
+      placeholder: |
+        - Authentication setup
+        - Project structure
+        - CI/CD configuration
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope
+      description: What is not included?
+      placeholder: |
+        - Payment system
+        - Advanced analytics
+
+  - type: textarea
+    id: user_stories
+    attributes:
+      label: Related User Stories
+      description: List the related user stories.
+      placeholder: |
+        - #12
+        - #13
+        - #14
