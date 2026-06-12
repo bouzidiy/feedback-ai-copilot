@@ -4,24 +4,13 @@ title: "[US] "
 labels: ["user-story"]
 
 body:
-
-  - type: input
-    id: epic
-    attributes:
-      label: Epic
-      description: Parent epic for this user story.
-      placeholder: "Feedback Management"
-    validations:
-      required: true
-
   - type: textarea
     id: context
     attributes:
       label: Context
-      description: Why does this story exist?
+      description: Why is this story needed?
       placeholder: |
-        Customer feedback is the core business entity of the platform.
-        This story establishes the foundation for future AI analysis.
+        Explain the business or functional context.
     validations:
       required: true
 
@@ -29,24 +18,13 @@ body:
     id: story
     attributes:
       label: User Story
-      description: Describe the user story.
+      description: Describe the user story using the standard format.
       placeholder: |
         As a user
 
-        I want to create a feedback
+        I want to ...
 
-        So that I can store customer feedback for future analysis
-    validations:
-      required: true
-
-  - type: textarea
-    id: business_value
-    attributes:
-      label: Business Value
-      description: What value does this story provide?
-      placeholder: |
-        - Enables feedback collection
-        - Supports future AI features
+        So that ...
     validations:
       required: true
 
@@ -57,14 +35,14 @@ body:
       description: Define when this story is considered done.
       placeholder: |
         Scenario 1:
-        Given a valid request
-        When the feedback is submitted
-        Then the feedback is stored successfully
+        Given ...
+        When ...
+        Then ...
 
         Scenario 2:
-        Given an invalid request
-        When the feedback is submitted
-        Then a validation error is returned
+        Given ...
+        When ...
+        Then ...
     validations:
       required: true
 
@@ -72,33 +50,11 @@ body:
     id: technical_notes
     attributes:
       label: Technical Notes
-      description: Optional implementation guidance.
+      description: Optional implementation details.
       placeholder: |
-        - Spring Boot REST endpoint
-        - PostgreSQL persistence
-        - Flyway migration
+        - Spring Boot endpoint
+        - PostgreSQL table
         - Integration tests
-
-  - type: textarea
-    id: out_of_scope
-    attributes:
-      label: Out of Scope
-      description: What is explicitly not included?
-      placeholder: |
-        - AI analysis
-        - Attachments
-        - Authentication
-
-  - type: textarea
-    id: definition_of_done
-    attributes:
-      label: Definition of Done
-      description: Conditions required before closing the story.
-      placeholder: |
-        - Feature implemented
-        - Tests passing
-        - Documentation updated
-        - Code committed
 
   - type: dropdown
     id: priority
