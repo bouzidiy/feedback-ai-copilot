@@ -1,4 +1,4 @@
-name: Build and Test
+name: Backend - Build and Test
 
 on:
   workflow_dispatch:
@@ -21,6 +21,10 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: apps/backend
+
     steps:
       - name: Checkout du projet
         uses: actions/checkout@v4
@@ -31,9 +35,10 @@ jobs:
           distribution: temurin
           java-version: "25"
           cache: maven
+          cache-dependency-path: apps/backend/pom.xml
 
       - name: Autoriser Maven Wrapper
         run: chmod +x mvnw
 
       - name: Compiler et exécuter les tests
-        run: ./mvnw clean verify
+        run: ./mvnw --batch-mode clean verify
