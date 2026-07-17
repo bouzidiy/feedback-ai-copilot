@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: feedback-ai-postgres
+    environment:
+      POSTGRES_DB: feedback_ai
+      POSTGRES_USER: feedback_user
+      POSTGRES_PASSWORD: feedback_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - feedback_ai_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  feedback_ai_postgres_data:
