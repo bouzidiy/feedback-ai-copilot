@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: feedback-ai-copilot
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/feedback_ai}
+    username: ${DB_USERNAME:feedback_user}
+    password: ${DB_PASSWORD:feedback_password}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
