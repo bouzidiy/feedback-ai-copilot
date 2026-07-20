@@ -2,7 +2,7 @@ package com.yassine.feedbackaicopilot.infrastructure.web.feedback.request;
 
 import com.yassine.feedbackaicopilot.domain.feedback.model.FeedbackSource;
 
-public record CreateFeedbackRequest(
+public record UpdateFeedbackRequest(
         String title,
         String content,
         FeedbackSource source,

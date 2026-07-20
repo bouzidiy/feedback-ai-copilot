@@ -1,6 +1,7 @@
 package com.yassine.feedbackaicopilot.infrastructure.web.common;
 
 import com.yassine.feedbackaicopilot.domain.feedback.exception.InvalidFeedbackException;
+import com.yassine.feedbackaicopilot.domain.feedback.exception.FeedbackNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -9,6 +10,7 @@ import java.time.Instant;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -18,6 +20,16 @@ public class GlobalExceptionHandler {
     public ApiError handleInvalidFeedbackException(InvalidFeedbackException exception) {
         return new ApiError(
                 "INVALID_FEEDBACK",
+                exception.getMessage(),
+                Instant.now()
+        );
+    }
+
+    @ExceptionHandler(FeedbackNotFoundException.class)
+    @ResponseStatus(NOT_FOUND)
+    public ApiError handleFeedbackNotFoundException(FeedbackNotFoundException exception) {
+        return new ApiError(
+                "FEEDBACK_NOT_FOUND",
                 exception.getMessage(),
                 Instant.now()
         );

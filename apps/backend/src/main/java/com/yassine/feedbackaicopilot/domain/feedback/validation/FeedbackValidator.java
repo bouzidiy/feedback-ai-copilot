@@ -17,6 +17,8 @@ public final class FeedbackValidator {
 
     private static final int MIN_CONTENT_LENGTH = 3;
     private static final int MAX_CONTENT_LENGTH = 2000;
+    private static final int MIN_TITLE_LENGTH = 3;
+    private static final int MAX_TITLE_LENGTH = 255;
     private static final int MIN_RATING = 1;
     private static final int MAX_RATING = 5;
 
@@ -26,6 +28,21 @@ public final class FeedbackValidator {
                     "id",
                     "Feedback id is required",
                     data -> data.id() == null
+            ),
+            rule(
+                    "title",
+                    "Feedback title is required",
+                    data -> data.title() == null || data.title().isBlank()
+            ),
+            rule(
+                    "title",
+                    "Feedback title must contain at least 3 characters",
+                    data -> hasText(data.title()) && data.title().length() < MIN_TITLE_LENGTH
+            ),
+            rule(
+                    "title",
+                    "Feedback title must not exceed 255 characters",
+                    data -> hasText(data.title()) && data.title().length() > MAX_TITLE_LENGTH
             ),
             rule(
                     "content",
@@ -65,6 +82,7 @@ public final class FeedbackValidator {
 
     public static void validate(
             UUID id,
+            String title,
             String content,
             FeedbackSource source,
             Integer rating,
@@ -72,6 +90,7 @@ public final class FeedbackValidator {
     ) {
         var data = new FeedbackValidationData(
                 id,
+                title,
                 content,
                 source,
                 rating,
@@ -91,6 +110,7 @@ public final class FeedbackValidator {
     @Builder
     private record FeedbackValidationData(
             UUID id,
+            String title,
             String content,
             FeedbackSource source,
             Integer rating,

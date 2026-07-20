@@ -28,11 +28,28 @@ class CreateFeedbackUseCaseTest {
     private CreateFeedbackUseCase createFeedbackUseCase;
 
     @Test
+    @DisplayName("Should reject feedback when title is null")
+    void shouldRejectFeedbackWhenTitleIsNull() {
+        FeedbackSource source = FeedbackSource.values()[0];
+
+        assertThatThrownBy(() -> createFeedbackUseCase.create(
+                null,
+                "Application simple à utiliser",
+                source,
+                4
+        ))
+                .isInstanceOf(InvalidFeedbackException.class)
+                .hasMessage("Feedback title is required");
+
+        verifyNoInteractions(feedbackRepositoryPort);
+    }
+
+    @Test
     @DisplayName("Should reject feedback when content is null")
     void shouldRejectFeedbackWhenContentIsNull() {
         FeedbackSource source = FeedbackSource.values()[0];
 
-        assertThatThrownBy(() -> createFeedbackUseCase.create(null, source, 4))
+        assertThatThrownBy(() -> createFeedbackUseCase.create("Useful feedback", null, source, 4))
                 .isInstanceOf(InvalidFeedbackException.class)
                 .hasMessage("Feedback content is required");
 
@@ -46,6 +63,7 @@ class CreateFeedbackUseCaseTest {
 
         assertThatThrownBy(() ->
                 createFeedbackUseCase.create(
+                        "Useful feedback",
                         "Application simple à utiliser",
                         source,
                         0
@@ -64,6 +82,7 @@ class CreateFeedbackUseCaseTest {
 
         assertThatThrownBy(() ->
                 createFeedbackUseCase.create(
+                        "Useful feedback",
                         "Application simple à utiliser",
                         source,
                         6
@@ -79,6 +98,7 @@ class CreateFeedbackUseCaseTest {
     @DisplayName("Should create and save a feedback")
     void shouldCreateAndSaveFeedback() {
         // Given
+        var title = "Navigation is clear";
         var content = "L'application est simple à utiliser";
         var source = FeedbackSource.values()[0];
         var rating = 5;
@@ -87,7 +107,7 @@ class CreateFeedbackUseCaseTest {
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
         // When
-        var result = createFeedbackUseCase.create(content, source, rating);
+        var result = createFeedbackUseCase.create(title, content, source, rating);
 
         // Then
         var feedbackCaptor = ArgumentCaptor.forClass(Feedback.class);
@@ -95,6 +115,8 @@ class CreateFeedbackUseCaseTest {
         verify(feedbackRepositoryPort).save(feedbackCaptor.capture());
 
         var feedbackSentToRepository = feedbackCaptor.getValue();
+
+        assertThat(feedbackSentToRepository.title()).isEqualTo(title);
 
         assertThat(feedbackSentToRepository.content()).isEqualTo(content);
 

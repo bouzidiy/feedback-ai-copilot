@@ -1,0 +1,21 @@
+# Each request is separated by a blank line.
+# First line: METHOD PATH
+# Following lines: HTTPie request items.
+
+POST /api/feedbacks
+title=Navigation is clear
+content=The application is simple to use and the main workflow is easy to follow.
+source=APP
+rating:=5
+
+GET /api/feedbacks/{{feedbackId}}
+
+PUT /api/feedbacks/{{feedbackId}}
+title=Navigation is excellent
+content=The application is simple to use and the updated workflow is clear.
+source=SURVEY
+rating:=5
+
+GET /api/feedbacks
+
+DELETE /api/feedbacks/{{feedbackId}}

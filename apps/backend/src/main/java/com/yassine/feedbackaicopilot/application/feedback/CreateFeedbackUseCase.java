@@ -12,8 +12,8 @@ public class CreateFeedbackUseCase {
 
     private final FeedbackRepositoryPort feedBackRepositoryPort;
 
-    public Feedback create(String content, FeedbackSource source, Integer rating) {
-        var feedback = Feedback.create(content, source, rating);
+    public Feedback create(String title, String content, FeedbackSource source, Integer rating) {
+        var feedback = Feedback.create(title, content, source, rating);
         return feedBackRepositoryPort.save(feedback);
     }
 }

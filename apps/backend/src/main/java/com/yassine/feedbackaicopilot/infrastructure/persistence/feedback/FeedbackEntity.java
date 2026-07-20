@@ -17,6 +17,9 @@ public class FeedbackEntity {
     @Id
     private UUID id;
 
+    @Column(nullable = false)
+    private String title;
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
