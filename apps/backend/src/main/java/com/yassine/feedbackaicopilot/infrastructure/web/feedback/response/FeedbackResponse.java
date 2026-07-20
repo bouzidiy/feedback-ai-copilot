@@ -7,8 +7,10 @@ import java.util.UUID;
 
 public record FeedbackResponse(
         UUID id,
+        String title,
         String content,
         FeedbackSource source,
+        Integer rating,
         LocalDateTime createdAt
 ) {
 }

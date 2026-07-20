@@ -9,8 +9,10 @@ public class FeedbackMapper {
     public FeedbackEntity toEntity(Feedback feedback) {
         return FeedbackEntity.builder()
                 .id(feedback.id())
+                .title(feedback.title())
                 .content(feedback.content())
                 .source(feedback.source())
+                .rating(feedback.rating())
                 .createdAt(feedback.createdAt())
                 .build();
     }
@@ -18,6 +20,7 @@ public class FeedbackMapper {
     public Feedback toDomain(FeedbackEntity entity) {
         return new Feedback(
                 entity.getId(),
+                entity.getTitle(),
                 entity.getContent(),
                 entity.getSource(),
                 entity.getRating(),
