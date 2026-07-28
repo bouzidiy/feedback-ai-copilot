@@ -36,4 +36,4 @@ AI-powered feedback analysis platform built with Spring Boot, Angular and Postgr
 
 ## Roadmap
 
-See ROADMAP.md
+See [ROADMAP](ROADMAP.md)
