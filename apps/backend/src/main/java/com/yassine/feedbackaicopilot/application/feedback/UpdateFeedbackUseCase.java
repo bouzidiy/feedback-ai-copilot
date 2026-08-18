@@ -15,13 +15,7 @@ public class UpdateFeedbackUseCase {
 
     private final FeedbackRepositoryPort feedbackRepositoryPort;
 
-    public Feedback update(
-            UUID id,
-            String title,
-            String content,
-            FeedbackSource source,
-            Integer rating
-    ) {
+    public Feedback update(UUID id, String title, String content, FeedbackSource source, Integer rating) {
         var existingFeedback = feedbackRepositoryPort.findById(id)
                 .orElseThrow(() -> new FeedbackNotFoundException(id));
 

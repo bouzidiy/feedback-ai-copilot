@@ -2,6 +2,7 @@ package com.yassine.feedbackaicopilot.infrastructure.web.common;
 
 import com.yassine.feedbackaicopilot.domain.feedback.exception.InvalidFeedbackException;
 import com.yassine.feedbackaicopilot.domain.feedback.exception.FeedbackNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,6 +15,21 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(BAD_REQUEST)
+    public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+        var message = exception.getBindingResult()
+                .getAllErrors()
+                .getFirst()
+                .getDefaultMessage();
+
+        return new ApiError(
+                "INVALID_FEEDBACK",
+                message,
+                Instant.now()
+        );
+    }
 
     @ExceptionHandler(InvalidFeedbackException.class)
     @ResponseStatus(BAD_REQUEST)

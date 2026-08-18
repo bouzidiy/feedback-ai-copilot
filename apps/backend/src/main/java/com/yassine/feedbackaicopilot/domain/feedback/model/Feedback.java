@@ -16,47 +16,15 @@ public record Feedback(
     public Feedback {
         title = normalize(title);
         content = normalize(content);
-
-        FeedbackValidator.validate(
-                id,
-                title,
-                content,
-                source,
-                rating,
-                createdAt
-        );
+        FeedbackValidator.validate(id, title, content, source, rating, createdAt);
     }
 
-    public static Feedback create(
-            String title,
-            String content,
-            FeedbackSource source,
-            Integer rating
-    ) {
-        return new Feedback(
-                UUID.randomUUID(),
-                title,
-                content,
-                source,
-                rating,
-                LocalDateTime.now()
-        );
+    public static Feedback create(String title, String content, FeedbackSource source, Integer rating) {
+        return new Feedback(UUID.randomUUID(), title, content, source, rating, LocalDateTime.now());
     }
 
-    public Feedback update(
-            String title,
-            String content,
-            FeedbackSource source,
-            Integer rating
-    ) {
-        return new Feedback(
-                id,
-                title,
-                content,
-                source,
-                rating,
-                createdAt
-        );
+    public Feedback update(String title, String content, FeedbackSource source, Integer rating) {
+        return new Feedback(id, title, content, source, rating, createdAt);
     }
 
     private static String normalize(String value) {

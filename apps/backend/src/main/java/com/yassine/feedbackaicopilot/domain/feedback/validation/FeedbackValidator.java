@@ -80,22 +80,13 @@ public final class FeedbackValidator {
     private FeedbackValidator() {
     }
 
-    public static void validate(
-            UUID id,
-            String title,
-            String content,
-            FeedbackSource source,
-            Integer rating,
-            LocalDateTime createdAt
-    ) {
-        var data = new FeedbackValidationData(
-                id,
-                title,
-                content,
-                source,
-                rating,
-                createdAt
-        );
+    public static void validate(UUID id,
+                                String title,
+                                String content,
+                                FeedbackSource source,
+                                Integer rating,
+                                LocalDateTime createdAt) {
+        var data = new FeedbackValidationData(id, title, content, source, rating, createdAt);
 
         var violations = RULES.stream()
                 .map(rule -> rule.validate(data))
@@ -108,14 +99,12 @@ public final class FeedbackValidator {
     }
 
     @Builder
-    private record FeedbackValidationData(
-            UUID id,
-            String title,
-            String content,
-            FeedbackSource source,
-            Integer rating,
-            LocalDateTime createdAt
-    ) {
+    private record FeedbackValidationData(UUID id,
+                                          String title,
+                                          String content,
+                                          FeedbackSource source,
+                                          Integer rating,
+                                          LocalDateTime createdAt) {
     }
 
 }

@@ -9,6 +9,7 @@ import com.yassine.feedbackaicopilot.domain.feedback.model.Feedback;
 import com.yassine.feedbackaicopilot.infrastructure.web.feedback.request.CreateFeedbackRequest;
 import com.yassine.feedbackaicopilot.infrastructure.web.feedback.request.UpdateFeedbackRequest;
 import com.yassine.feedbackaicopilot.infrastructure.web.feedback.response.FeedbackResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +45,7 @@ public class FeedbackController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public FeedbackResponse create(@RequestBody CreateFeedbackRequest request) {
+    public FeedbackResponse create(@Valid @RequestBody CreateFeedbackRequest request) {
         Feedback feedback = createFeedbackUseCase.create(
                 request.title(),
                 request.content(),

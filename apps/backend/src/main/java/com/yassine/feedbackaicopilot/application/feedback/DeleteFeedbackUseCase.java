@@ -16,7 +16,6 @@ public class DeleteFeedbackUseCase {
     public void delete(UUID id) {
         feedbackRepositoryPort.findById(id)
                 .orElseThrow(() -> new FeedbackNotFoundException(id));
-
         feedbackRepositoryPort.deleteById(id);
     }
 }

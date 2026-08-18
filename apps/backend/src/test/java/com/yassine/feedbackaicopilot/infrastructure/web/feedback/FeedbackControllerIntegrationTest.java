@@ -87,6 +87,42 @@ class FeedbackControllerIntegrationTest {
     }
 
     @Test
+    @DisplayName("Should return validation error when title is missing")
+    void shouldReturnValidationErrorWhenTitleIsMissing() throws Exception {
+        mockMvc.perform(post("/api/feedbacks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "content": "The application is simple to use.",
+                                  "source": "APP",
+                                  "rating": 5
+                                }
+                                """))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("INVALID_FEEDBACK"))
+                .andExpect(jsonPath("$.message").value("Feedback title is required"))
+                .andExpect(jsonPath("$.timestamp").exists());
+    }
+
+    @Test
+    @DisplayName("Should return validation error when content is missing")
+    void shouldReturnValidationErrorWhenContentIsMissing() throws Exception {
+        mockMvc.perform(post("/api/feedbacks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "title": "Navigation is clear",
+                                  "source": "APP",
+                                  "rating": 5
+                                }
+                                """))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("INVALID_FEEDBACK"))
+                .andExpect(jsonPath("$.message").value("Feedback content is required"))
+                .andExpect(jsonPath("$.timestamp").exists());
+    }
+
+    @Test
     @DisplayName("Should update feedback")
     void shouldUpdateFeedback() throws Exception {
         var id = createFeedback("""
@@ -154,7 +190,7 @@ class FeedbackControllerIntegrationTest {
     }
 
     private UUID createFeedback(String requestBody) throws Exception {
-        MvcResult result = mockMvc.perform(post("/api/feedbacks")
+        var result = mockMvc.perform(post("/api/feedbacks")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isCreated())
